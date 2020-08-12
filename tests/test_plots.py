@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
+import pytest
 from pytest import fixture
 
 from nata.containers import GridDataset
@@ -35,8 +36,13 @@ def test_default_grid_plot_types(SampleGridDataset):
         assert isinstance(plot, DefaultGridPlotTypes[i + 1])
 
 
-def test_invalid_grid_plot_dims():
-    pass
+def test_invalid_grid_plot_dims(SampleGridDataset):
+    with pytest.raises(
+        NotImplementedError, match="Plots of 3D grids are not supported yet"
+    ):
+        grid_shape = 3 * (5,)
+        ds = SampleGridDataset(grid_shape=grid_shape)
+        ds.plot()
 
 
 def test_default_particle_plot_types():

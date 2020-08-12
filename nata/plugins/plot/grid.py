@@ -128,6 +128,9 @@ def plot_grid_dataset(
 
     """
 
+    if len(dataset.grid_shape) > 2:
+        raise NotImplementedError("Plots of 3D grids are not supported yet.")
+
     p_plan = PlotPlan(
         dataset=dataset, style=filter_style(dataset.plot_type(), style)
     )
